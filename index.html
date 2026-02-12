@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-container" id="quizContainer">
+            <div class="quiz-header">
+                <h1>🧠 JavaScript Quiz</h1>
+                <div class="progress-bar">
+                    <div id="progress" class="progress"></div>
+                </div>
+                <p class="question-counter">
+                    Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span>
+                </p>
+            </div>
+            
+            <div id="quiz" class="quiz">
+                <h2 id="question">Question text goes here?</h2>
+                
+                <ul class="options" id="options">
+                    <li>
+                        <input type="radio" name="answer" id="option0" value="0">
+                        <label for="option0" id="label0">Option 1</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="answer" id="option1" value="1">
+                        <label for="option1" id="label1">Option 2</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="answer" id="option2" value="2">
+                        <label for="option2" id="label2">Option 3</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="answer" id="option3" value="3">
+                        <label for="option3" id="label3">Option 4</label>
+                    </li>
+                </ul>
+                
+                <button id="submit" class="btn">Submit Answer</button>
+            </div>
+            
+            <div id="result" class="result hidden">
+                <h2>Quiz Completed! 🎉</h2>
+                <p class="score">You scored <span id="score">0</span> out of <span id="totalScore">10</span></p>
+                <p id="resultMessage" class="result-message"></p>
+                <button id="restart" class="btn">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

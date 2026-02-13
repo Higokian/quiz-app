@@ -39,6 +39,24 @@ const quizData = [
 
 // TODO: Select DOM elements
 // We'll do this tomorrow!
+const questionEl = document.getElementById('question');
+const optionsEls = [
+    document.getElementById('label0'),
+    document.getElementById('label1'),
+    document.getElementById('label2'),
+    document.getElementById('label3'),
+];
+
+const submitBtn = document.getElementById('submit');
+const quizContainer = document.getElementById('quiz');
+const resultContainer = document.getElementById('result');
+const scoreEl = document.getElementById('score');
+const totalScoreEl = document.getElementById('totalScore');
+const resultMessageEl = document.getElementById('resultMessage');
+const restartBtn = document.getElementById('restart');
+const progressBar = document.getElementById('progress');
+const currentQuestionEl = document.getElementById('currentQuestion');
+const totalQuestionsEl = document.getElementById('totalQuestions');
 
 // TODO: Track quiz state
 // currentQuestion, score, etc.

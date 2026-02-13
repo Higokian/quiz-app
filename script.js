@@ -60,6 +60,28 @@ const totalQuestionsEl = document.getElementById('totalQuestions');
 
 // TODO: Track quiz state
 // currentQuestion, score, etc.
+let currentQuestionIndex = 0;
+let score = 0;
+
+// ===== INITIALIZE QUIZ =====
+
+const init = () => {
+    currentQuestionIndex = 0;
+    score = 0;
+
+    // Show quiz, hide results
+    quizContainer.classList.remove('hidden');
+    resultContainer.classList.add('hidden');
+
+    // Update total questions
+    totalQuestionsEl.textContent = quizData.length;
+
+    // Load first question
+    loadQuestion();
+}
+
+// Start quiz
+init();
 
 // TODO: Load question function
 

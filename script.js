@@ -107,11 +107,118 @@ const loadQuestion = () => {
     // Remove any feedback classes
     radio.nextElementSibling.classList.remove("correct", "incorrect");
   });
+
+  // Enable submit button
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Submit Answer';
 };
 
 // TODO: Check answer function
 
+const getSelectedAnswer = () => {
+    // Get all radio buttons
+    const radioButtons = document.querySelectorAll('input[name="answer"]');
+
+    // Find which one is checked
+    let selectedAnswer = null;
+
+    radioButtons.forEach((radio, index) => {
+        if (radio.checked) {
+            selectedAnswer = index;
+        }
+    });
+
+    return selectedAnswer;
+}
+
+// ===== CHECK ANSWER =====
+
+const checkAnswer = () => {
+    const selectedAnswer = getSelectedAnswer();
+
+    // Make sure an answer was selected
+    if (selectedAnswer == null) {
+        alert('Please select an answer!');
+        return;
+    }
+
+    const currentQuestion = quizData[currentQuestionIndex];
+    const correctAnswer = currentQuestion.correct;
+
+    // Get all labels
+    const labels = document.querySelectorAll('.options label');
+
+    // Check if answer is correct
+    if (selectedAnswer === correctAnswer) {
+        score++;
+        labels[selectedAnswer].classList.add('correct');
+    } else {
+        labels[selectedAnswer].classList.add('incorrect');
+        labels[correctAnswer].classList.add('correct');
+    }
+
+    // Disable submit button temporarily
+    submitBtn.disabled = true;
+
+    // Move to next question after 1.5 seconds
+    setTimeout(() => {
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex < quizData.length) {
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    }, 1500);
+};
+
 // TODO: Show result function
+
+// ===== SHOW RESULTS =====
+const showResults = () => {
+    // Hide quiz, show results
+    quizContainer.classList.add('hidden');
+    resultContainer.classList.remove('hidden');
+
+    // Update score
+    scoreEl.textContent = score;
+    totalScoreEl.textContent = quizData.length;
+
+    // Calculate percentage
+    const percentage = (score / quizData.length) * 100;
+
+    // Show message based on score
+    let message = '';
+
+    if (percentage === 100) {
+        message = '🎉 Perfect score! You\'re a JavaScript master!';
+    } else if (percentage >= 80) {
+        message = '👏 Great job! You know your stuff!';
+    } else if (percentage >= 60) {
+        message = '👍 Good effort! Keep learning!';
+    } else if (percentage >= 40) {
+        message = '📚 Not bad, but there\'s room for improvement!';
+    } else {
+        message = '💪 Keep practicing! You\'ll get there!';
+    }
+    
+    resultMessageEl.textContent = message;
+}
+
+// ===== EVENT LISTENERS =====
+
+// Submit answer
+submitBtn.addEventListener('click', checkAnswer);
+
+// Restart quiz
+restartBtn.addEventListener('click', init);
+
+// Allow enter key to submit
+document.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        checkAnswer();
+    }
+})
 
 // TODO: Restart quiz function
 
